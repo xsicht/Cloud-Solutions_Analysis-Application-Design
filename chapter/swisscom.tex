@@ -112,11 +112,99 @@ Auch bei der Wahl des Providers sind die SLAs enorm wichtig. Es gibt immer wie m
 \href{"https://developer.swisscom.com/terms/SLADefinitions-en.pdf"}{SLA-Definitions - Enterprise Customers}\\
 \href{"https://www.swisscom.ch/content/dam/swisscom/de/biz/sme/mykmuoffice/pdf/SLA_Besondere_Bedingungen_dt.pdf"}{Besondere Bedienungen}
 
-
-\chapter{Konzept: Modellierung mit Cloud Computing Patterns (CCP)}
+\chapter{Konzept: Cloud Computing Patterns (CCP)}
+Bei der Swisscom wird für die PaaS-Umgebung die Lösung von Cloud Foundry eingesetzt. Die Architektur sieht folgendermassen aus:
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{images/ccp/cloudfoundry.png}
+\caption{Cloud Foundry Architektur}
+\end{figure}
+Zum Vergleich ist hier nochmals das Standardarchitektur Pattern:
+\section{Abbildung auf das CCP Architecture Overview Diagram}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{images/ccp/ccp.png}
+\caption{CCP Architektur Diagramm}
+\end{figure}
+\subsection{Mappingtabelle}
+\begin{table}[H]
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{CCP Architecture Overview Diagram} & \textbf{Swisscom - Cloud Foundry} \\ 
+\hline 
+Self-Service Interface / API & Router, Login Server / UAA \\ 
+\hline 
+Metering und Billing & Metrics Collector, App Log Aggregator \\ 
+\hline 
+Component Management & Cloud Controller \\ 
+\hline 
+Monitoring & Health Manager \\ 
+\hline 
+Component Storage & Blob Store \\ 
+\hline 
+Components & Warden \\ 
+\hline 
+Execution Enviroment & Application Execution (DEA) \\ 
+\hline 
+\end{tabular} 
+\end{table}
 
 \chapter{Analyse: SWOT-Assessment von Cloud Provider und Cloud Offering}
+\begin{table}[H]
+\begin{tabular}{|l|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline 
+ & \textbf{Positiv (Nützlich)}  & \textbf{Negativ (Schädlich)} \\ \hline 
+\textbf{Interne} & \textbf{Stärken} 
+\begin{itemize}
+\item 3-5
+\end{itemize}
+
+& \textbf{Schwächen}
+\begin{itemize}
+\item 3-5
+\end{itemize}
+
+\\ \hline 
+\textbf{Externe} & \textbf{Chancen} 
+\begin{itemize}
+\item 2-3
+\end{itemize}&
+\textbf{Bedrohungen (Risiken)} 
+ \begin{itemize}
+\item 2-3
+\end{itemize}
+\\ \hline 
+\end{tabular} 
+\end{table}
 
 \chapter{Konzept: Provider Evaluation Checkliste}
+\begin{table}[H]
+\begin{tabular}{|p{0.3\textwidth}|l|p{0.5\textwidth}|}
+\hline 
+ & Erfüllt? & Kommentar \\ 
+\hline 
+Kriterium 1 & Ja & • \\ 
+\hline 
+Kriterium 2 & Nein & • \\ 
+\hline 
+Kriterium 3 & • & • \\ 
+\hline 
+Kriterium 4 & • & • \\ 
+\hline 
+Kriterium 5 & • & • \\ 
+\hline 
+Kriterium 6 & • & • \\ 
+\hline 
+Kriterium 7 & • & • \\ 
+\hline 
+Kriterium 8 & • & • \\ 
+\hline 
+Kriterium 9 & • & • \\ 
+\hline 
+Kriterium 10 & • & • \\ 
+\hline 
+\end{tabular} 
+\end{table}
 
 \chapter{Analyse: Management Summary}
+Maximal 1 Seite
