@@ -95,6 +95,29 @@ Die Datenbankservices sind bei Swisscom nur über IP Adressen aus dem privaten A
 
 Die Zugriffe zur Datenbank sind mittels zufallsgenerierten Strings für Username und Passworte authentisiert. Eine TLS verschlüsselte Verbindung zwischen App und Datenbank wäre ebenfalls wünschenswert und im Falle eines Zugriffs aus dem Internet (hier nicht der Fall) zwingend notwendig. Wir haben leider keine Informationen betreffend Verschlüsselung der Verbindungen gefunden, und ein Sniffen des Netzwerkverkehrs ist für uns leider nicht ohne weiteres Möglich. 
 
+\chapter{Hands-On: NoSQL-Persistence in der Cloud (am Beispiel MongoDB)} %DONE
+\section{Anleitung}
+Für diese Aufgabe wurde das ContractManagement verwendet. Dieses bereitete aber keine grossen Probleme.
+\begin{longtable}{| p{5cm} | p{11cm} |}
+\hline
+Auf der PaaS Platform der Swisscom kann man sehr einfach einen neuen Service hinzufügen. Dazu wählt man nur Create Service und klickt auf MongoDB. &\includegraphics[width=0.65\columnwidth, valign=T]{images/mongodbexample/image1.png}
+ \\ \hline
+ Nun vergibt man einen Namen und wählt die gewünschte Grösse. Für dieses kleine Projekt reicht Small vollkommen aus.
+&\includegraphics[width=0.4\columnwidth, valign=T]{images/mongodbexample/image2.png}
+ \\ \hline
+Dies erstellt automatisch die neue MongoDB. Nach ca. 1-2 Minuten ist diese bereit und kann konfiguriert werden. Damit man eine Verbindung zur Datenbank herstellen kann, muss man einen Service Key erstellen. Dies geschieht durch einen klick auf Create Service Key.
+&\includegraphics[width=0.65\columnwidth, valign=T]{images/mongodbexample/image3.png}
+ \\ \hline
+Für den Service Key gibt man einen passenden Namen und klickt auf Save.
+&\includegraphics[width=0.65\columnwidth, valign=T]{images/mongodbexample/image4.png}
+ \\ \hline
+Nun erhält man die Zugangsdaten und kann diese kopieren...
+&\includegraphics[width=0.65\columnwidth, valign=T]{images/mongodbexample/image5.png}
+ \\ \hline
+... und in der Applikation hinterlegen. Nun funktioniert die Verbindung zur MongoDB und man muss die Applikation wie bei Aufgabe 1 auf die Plattform laden.&\includegraphics[width=0.65\columnwidth, valign=T]{images/mongodbexample/image6.png}
+ \\ \hline
+\end{longtable}
+
 \section{Fragen}
 \subsection{Was has wie erwartete funktioniert?}
 Eigentlich hat alles wie geplant funktioniert. Einzig bei Eclipse hatten wir zuerst Probleme, da wir es zuerst Local mit Tomcat starten wollten, was aber nicht funktionierte. Doch mit dem Hochladen hat die Applikation sofort funktioniert. Grössere Konfigurationen mussten nicht gemacht werden.
