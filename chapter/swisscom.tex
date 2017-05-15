@@ -86,6 +86,9 @@ Wir benötigen für die App nun die MariaDB Dependencies, welche wir einfach mit
 Damit die Änderungen in der Datenbank auch nach dem Neustart persistent sind, müssen wir eine Anpassung der Konfiguration im File hibernate.properties vornehmen. Im Feld hibernate.hbm2ddl.auto müssen wir die Einstellung von \glqq create drop\grqq (nicht persistent) nach \glqq update\grqq ändern. 
 &\includegraphics[width=0.65\columnwidth, valign=T]{images/mariadb/7.png}
 \\ \hline 
+Nun muss nur noch im File jdbc.properties der zu verwendende Treiber und der Connection String angepasst werden.
+&\includegraphics[width=0.65\columnwidth, valign=T]{images/mariadb/8.png}
+\\ \hline 
 \end{longtable}
 
 Die Änderungen müssen nun mit Maven Update, resp. Maven Build angepasst und neu gepusht werden.
@@ -94,6 +97,16 @@ Die Änderungen müssen nun mit Maven Update, resp. Maven Build angepasst und ne
 Die Datenbankservices sind bei Swisscom nur über IP Adressen aus dem privaten Adressbereich erreichbar. Dies lässt schliessen, dass Swisscom selbst in ihrem Datacenter die Datenbanken hostet. Eine direkte Anbindung der Datenbank ausserhalb der Swisscom App Cloud ist daher nicht möglich. 
 
 Die Zugriffe zur Datenbank sind mittels zufallsgenerierten Strings für Username und Passworte authentisiert. Eine TLS verschlüsselte Verbindung zwischen App und Datenbank wäre ebenfalls wünschenswert und im Falle eines Zugriffs aus dem Internet (hier nicht der Fall) zwingend notwendig. Wir haben leider keine Informationen betreffend Verschlüsselung der Verbindungen gefunden, und ein Sniffen des Netzwerkverkehrs ist für uns leider nicht ohne weiteres Möglich. 
+
+\section{Fazit}
+Die Anbindung der MariaDB ist sehr einfach. In der Applikation muss nur der zu verwendende Connection String angepasst werden. Das Erstellen des Services und der Keys ist einfach und scheint gelungen. Einzig, dass keine Informationen betreffend Verschlüsselung vorhanden sind, ist nicht optimal.
+
+Wir hatten keine gröberen Probleme, haben aber festgestellt, dass nach dem Starten der App noch etwas gewartet werden muss, ansonsten kann die App abstürzen. Dies liegt wohl an längeren Ladezeiten im Hintergrund. 
+
+Die Dokumentation musste nicht konsultiert werden. Die Erstellung des Services ist sehr einfach und benötigt keine Erklärungen. In der DDD App mussten wir die zu verändernden Files kurz suchen, im Grossen und Ganzen hatten wir aber wenig Probleme.
+
+\section{Weitere Storage Offerings}
+Mit MariaDB und MongoDB werden die Storage Offerings \glqq Relational Database\grqq und \glqq Key-Value Storage\grqq gemäss Cloud Computing Patterns (CCP) angeboten. Als in Memory-Store, welcher ebenfalls dem CCP \glqq Key-Value Storage\grqq zugeordnet werden kann, wird Redis angeboten. Als Speicher für grosse Datasets bietet Swisscom den \glqq S3 Dynamic Storage\grqq . Dieser Service ist dem CCP \glqq Blob Storage\grqq zuzuordnen.
 
 \chapter{Hands-On: NoSQL-Persistence in der Cloud (am Beispiel MongoDB)} %DONE
 \section{Anleitung}
@@ -256,4 +269,4 @@ Kriterium 10 & • & • \\
 
 \chapter{Analyse: Management Summary}
 Maximal 1 Seite
->>>>>>> c6c2142652a3f9e030602eb023c90acd83a35bcc
+
