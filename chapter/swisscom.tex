@@ -87,9 +87,150 @@ Damit die Änderungen in der Datenbank auch nach dem Neustart persistent sind, m
 &\includegraphics[width=0.65\columnwidth, valign=T]{images/mariadb/7.png}
 \\ \hline 
 \end{longtable}
+
 Die Änderungen müssen nun mit Maven Update, resp. Maven Build angepasst und neu gepusht werden.
 
 \section{Security Überlegungen}
 Die Datenbankservices sind bei Swisscom nur über IP Adressen aus dem privaten Adressbereich erreichbar. Dies lässt schliessen, dass Swisscom selbst in ihrem Datacenter die Datenbanken hostet. Eine direkte Anbindung der Datenbank ausserhalb der Swisscom App Cloud ist daher nicht möglich. 
 
 Die Zugriffe zur Datenbank sind mittels zufallsgenerierten Strings für Username und Passworte authentisiert. Eine TLS verschlüsselte Verbindung zwischen App und Datenbank wäre ebenfalls wünschenswert und im Falle eines Zugriffs aus dem Internet (hier nicht der Fall) zwingend notwendig. Wir haben leider keine Informationen betreffend Verschlüsselung der Verbindungen gefunden, und ein Sniffen des Netzwerkverkehrs ist für uns leider nicht ohne weiteres Möglich. 
+
+\section{Fragen}
+\subsection{Was has wie erwartete funktioniert?}
+Eigentlich hat alles wie geplant funktioniert. Einzig bei Eclipse hatten wir zuerst Probleme, da wir es zuerst Local mit Tomcat starten wollten, was aber nicht funktionierte. Doch mit dem Hochladen hat die Applikation sofort funktioniert. Grössere Konfigurationen mussten nicht gemacht werden.
+\subsection{Was hat nicht funktioniert?}
+Nichts. Alles hat ohne Probleme funktioniert. 
+\subsection{Wie schätzen Sie die Sicherheit dieses Datenbank-Hostings ein?}
+Die Datenbank befindet sich für alle Erreichbar im Internet. Abgesichert wird die Datenbank lediglich durch ein Passwort und einen Benutzernamen. Diesen kann man aber nicht selber bestimmen oder abändern, was nicht sehr praktisch ist., Auch der Datenbankname kann nicht selber bestimmt oder angepasst werden. Es wird ein zufälliger Namen generiert. 
+
+
+\chapter{Analyse: Service Level Agreements(SLAs)} %DONE
+\section{Fragen}
+\subsection{Gibt es ein oder mehrere Service Level Objectives (SLOs)?}
+Bei der Swisscom gibt es mehrere Service Level Objectives. Es wird in verschiedene Kategorien unterteilt, wie zum Beispiel Availability, Security oder Continuity. Dabei wird jeder Punkt nochmals in drei SLA Stufen unterteilt. Diese sind Standard Public, Standard Virtual Private und Premium Virtual Private. So sind alle SLOs sehr genau beschrieben. Leider bietet die Swisscom momentan aber nur Best Effort an. Die SLAs sind für spätere Releases geplant, stehen aber schon bereit. Genauere angaben, ab wann diese gelten, konnten nicht gefunden werden. 
+\subsection{Questions to Ask}
+\subsubsection{How are uptime and availability calculated?}
+Diese Angabe ist bei der Swisscom vorhanden und wird wie folgt beschrieben:
+\begin{quote}
+The availability of each of the marketplace cloud services are measured by transactions on a reference service
+instance on the production. If these measurements show, that service is running, the availability status
+is set to „available” for this service. Unless otherwise stated, availability of the reference service is
+checked every 60 seconds and if two subsequent checks are failing the service is considered as unavailable.
+\end{quote}
+Dabei wird nicht zwischen Uptime und Availability unterschieden.
+\subsubsection{What should be in place for me to be covered?}
+Die Swisscom unterscheidet zwischen ''Normal Availability'' und ''High Availability''. Normal Availability bedeutet das man nur eine Instanz gestartet hat. High Availability bedeutet ein Cluster von Nodes. Das heisst mindestens zwei Nodes müssen gestartet sein. Zwischen Normal und High Availability liegen je nach Bezahlmodel 0.3 oder 0.4 Prozent Verfügbarkeit.
+\subsubsection{What about performance degradation as opposed to hard downtime?}
+Es werden zwei verschiedene SLAs angegeben. Der erste ist für die Instanz, sowie für das Cloud Management. Der zweite ist für den Marketplace Cloud Services. Beide enthalten untschiedliche SLOs, welche wieder in die verschiedenen Bezahlmodelle unterteilt sind.
+\subsubsection{What are the penalties for SLA violations?}
+Zu diesem Bereich gibt es keine genaueren Angaben. Im Dokument ist dazu nichts zu finden und man muss sich wahrscheinlich bei der Swisscom melden. Ob und wie man ausgezahlt wird, war auch nicht auffindbar.
+\subsubsection{What do I have to do to request a credit?}
+Wie bereits in der vorherigen Frage geschrieben, findet man zu diesem Thema nicht wirklich eine Angabe.
+\subsection{Fehlen bestimmte Evaluationskriterien?}
+Bei dem White Paper von Dimension Data geht es Hauptsächlich um Uptime und Availability. Heutzutage sollte man auch immer an das Thema Security denken. Dies wird viel zu häufig vernachlässigt. Der Rest deckt aber sehr viel ab und ist gut als Evaluationshilfe geeignet. 
+\subsection{Ist die Einhaltung und Existenz von SLAs wichtig?}
+\textbf{a)}
+Bei der Entscheidung ob man sein Produkt in die Cloud verlagert, sind die SLAs enorm wichtig. Diese Vergleicht man meistens mit seinen eigenen Möglichkeit. Zum Beispiel die Verfügbarkeit kann man dies einfach vergleichen. Möchte man eine hochverfügbare Umgebung aufbauen, oder ist eine fremde Cloud kostengünstiger. Dabei verlässt man sich immer auf die SLAs und möchte auch mit dieser rechnen können. 
+\textbf{b)}
+Auch bei der Wahl des Providers sind die SLAs enorm wichtig. Es gibt immer wie mehr Cloudanbieter und ohne SLAs kann man diese kaum miteinander vergleichen. Auch das einhalten ist wichtig, besonders für den Anbieter. Denn sobald die SLAs mehrmals gebrochen wurden, hat der Anbieter mit Kundenverlust zu rechnen.
+\subsection{Weitere wichtige Dokumente}
+\href{"https://developer.swisscom.com/terms/SLADefinitions-en.pdf"}{SLA-Definitions - Enterprise Customers}\\
+\href{"https://www.swisscom.ch/content/dam/swisscom/de/biz/sme/mykmuoffice/pdf/SLA_Besondere_Bedingungen_dt.pdf"}{Besondere Bedienungen}
+
+\chapter{Konzept: Cloud Computing Patterns (CCP)}
+Bei der Swisscom wird für die PaaS-Umgebung die Lösung von Cloud Foundry eingesetzt. Die Architektur sieht folgendermassen aus:
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{images/ccp/cloudfoundry.png}
+\caption{Cloud Foundry Architektur}
+\end{figure}
+Zum Vergleich ist hier nochmals das Standardarchitektur Pattern:
+\section{Abbildung auf das CCP Architecture Overview Diagram}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{images/ccp/ccp.png}
+\caption{CCP Architektur Diagramm}
+\end{figure}
+\subsection{Mappingtabelle}
+\begin{table}[H]
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{CCP Architecture Overview Diagram} & \textbf{Swisscom - Cloud Foundry} \\ 
+\hline 
+Self-Service Interface / API & Router, Login Server / UAA \\ 
+\hline 
+Metering und Billing & Metrics Collector, App Log Aggregator \\ 
+\hline 
+Component Management & Cloud Controller \\ 
+\hline 
+Monitoring & Health Manager \\ 
+\hline 
+Component Storage & Blob Store \\ 
+\hline 
+Components & Warden \\ 
+\hline 
+Execution Enviroment & Application Execution (DEA) \\ 
+\hline 
+\end{tabular} 
+\end{table}
+
+\chapter{Analyse: SWOT-Assessment von Cloud Provider und Cloud Offering}
+\begin{table}[H]
+\begin{tabular}{|l|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline 
+ & \textbf{Positiv (Nützlich)}  & \textbf{Negativ (Schädlich)} \\ \hline 
+\textbf{Interne} & \textbf{Stärken} 
+\begin{itemize}
+\item 3-5
+\end{itemize}
+
+& \textbf{Schwächen}
+\begin{itemize}
+\item 3-5
+\end{itemize}
+
+\\ \hline 
+\textbf{Externe} & \textbf{Chancen} 
+\begin{itemize}
+\item 2-3
+\end{itemize}&
+\textbf{Bedrohungen (Risiken)} 
+ \begin{itemize}
+\item 2-3
+\end{itemize}
+\\ \hline 
+\end{tabular} 
+\end{table}
+
+\chapter{Konzept: Provider Evaluation Checkliste}
+\begin{table}[H]
+\begin{tabular}{|p{0.3\textwidth}|l|p{0.5\textwidth}|}
+\hline 
+ & Erfüllt? & Kommentar \\ 
+\hline 
+Kriterium 1 & Ja & • \\ 
+\hline 
+Kriterium 2 & Nein & • \\ 
+\hline 
+Kriterium 3 & • & • \\ 
+\hline 
+Kriterium 4 & • & • \\ 
+\hline 
+Kriterium 5 & • & • \\ 
+\hline 
+Kriterium 6 & • & • \\ 
+\hline 
+Kriterium 7 & • & • \\ 
+\hline 
+Kriterium 8 & • & • \\ 
+\hline 
+Kriterium 9 & • & • \\ 
+\hline 
+Kriterium 10 & • & • \\ 
+\hline 
+\end{tabular} 
+\end{table}
+
+\chapter{Analyse: Management Summary}
+Maximal 1 Seite
+>>>>>>> c6c2142652a3f9e030602eb023c90acd83a35bcc
