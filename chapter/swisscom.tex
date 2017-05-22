@@ -212,7 +212,23 @@ Execution Enviroment & Application Execution (DEA) \\
 
 \section{Cloud-Deployment Modellierung}
 
+\subsection{Fragen}
+\subsubsection{Ist eine Decomposition-Strategie erkennbar?}
+\subsubsection{Wir würden Sie die Applikation refactoren?}
+Die Applikation müsste noch besser voneinander getrennt werden. Alle Komponenten sollte loser gestaltet sein, damit jeder Teil separat Überwacht und skaliert werden könnte. So würde die Applikation noch viel mehr von einer Cloud-Umgebung profitieren. Der Einsatz von Load-Balancer wäre so durchaus möglich. Oder auch andere Operation Management Pattern könnten viel einfacher Umgesetzt werden.
 
+\subsubsection{Welches Workload Pattern liegt vor?}
+Bei der Applikation ist das Unpredictable Workload Pattern erkennbar. Da es sich um ein Managementsystem handelt, kann man nicht vorhersagen, wann ein Benutzer die Applikation nutzt. Würde es fixe Wartungs- und Managementfenster geben, könnte die Last vorhergesagt werden. Aber sonst ist dies sehr schwer. Man weiss nur, dass die Last zu Arbeitszeiten sicher viel höher ist, denn um diese Zeit wird die Applikation eingesetzt.
+\subsubsection{Wie sind Application State Management und Session State Management gelöst?}
+Das Application State Management ...
+
+Das Session State Management wird nach dem Pattern Stateless Component umgesetzt. Alle Anfragen werden ohne State an die Applikation gesendet und werden verarbeitet. 
+
+\subsubsection{Welche Cloud Computing Patterns aus der Rubrik Cloud Application Components sehen Sie?}
+
+
+\subsubsection{Sollte Ihrer Meinung nach das Watchdog Pattern implementiert werden?}
+Nein, dies sollte nicht implementiert werden. Bevor dies möglich wäre, müsste man die Applikation zuerst noch umbauen. Die einzelnen Komponenten sind zu sehr Miteinander verbunden, um sie separat Überwachen zu können. Einzig der LwM2M Server könnte man überwachen und bei Fehlern sofort wieder Neustarten, da dieser separat von dem Rest der Applikation läuft. Aber auch für dies muss der Server noch umgebaut werden, damit die Applikation die Anfragen in einer Queue zwischenspeichern kann, damit beim Starten des neuen Servers keine Probleme entstehen.
 \chapter{Analyse: SWOT-Assessment von Cloud Provider und Cloud Offering}
 \begin{table}[H]
 \begin{tabular}{|l|p{0.4\textwidth}|p{0.4\textwidth}|}
