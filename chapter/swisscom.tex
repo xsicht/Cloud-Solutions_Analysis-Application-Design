@@ -274,31 +274,38 @@ Nein, dies sollte nicht implementiert werden. Bevor dies möglich wäre, müsste
 \begin{table}[H]
 \begin{tabular}{|p{0.3\textwidth}|l|p{0.5\textwidth}|}
 \hline 
- & Erfüllt? & Kommentar \\ 
+Transparentes und einfaches Preismodell & Erfüllt & - \\ 
 \hline 
-Kriterium 1 & Ja & • \\ 
+Unterstützung von marktführender und Open Source Produkten & Erfüllt & Dürfte mehr DB Technologien unterstützen. \\ 
 \hline 
-Kriterium 2 & Nein & • \\ 
+Breite Unterstützung der Cloud Computing Patterns  & Teilweise & Es sind nicht alle unterstützt. Dürfte besser sein. \\ 
 \hline 
-Kriterium 3 & • & • \\ 
+[Stabilität] & Erfüllt &  Bei uns gab es einen Service Unterbruch der MongoDB Instanzen. Man hört auch häufig über grössere Probleme. \\ 
 \hline 
-Kriterium 4 & • & • \\ 
+SLA-Modelle & Nicht erfüllt & Nur Best effort availability. Sind noch sehr knapp gehalten.\\ 
 \hline 
-Kriterium 5 & • & • \\ 
+Online Hilfe & Erfüllt & - \\ 
 \hline 
-Kriterium 6 & • & • \\ 
+Globale Verfügbarkeit & Nicht erfüllt & Es gibt nur schweizer Datencenter. Kann positiv, wie auch negativ betrachtet werden.\\ 
 \hline 
-Kriterium 7 & • & • \\ 
+Auto Scaling Möglichkeiten & Nicht erfüllt & Leider gar keine Auto Scaling Möglichkeiten. Müsste man alles selbst implementieren. \\ 
 \hline 
-Kriterium 8 & • & • \\ 
+Datenschutz & Erfüllt & - \\ 
 \hline 
-Kriterium 9 & • & • \\ 
+User Experience (Weboberfläche) & Erfüllt & Sehr gute Weboberfläche. \\ 
 \hline 
-Kriterium 10 & • & • \\ 
+Security & [Erfüllt] & Wir konnten keine gravierende Mängel feststellen. Infos fehlen aber zum Teil. \\ 
 \hline 
 \end{tabular} 
 \end{table}
 
 \chapter{Analyse: Management Summary}
-Maximal 1 Seite
+Die Swisscom eignet sich aufgrund des Schweizer Datenschutz für Applikationen mit sensitiven Benutzerdaten. Denn alle Rechenzentrum befinden sich in der Schweiz. Durch den Standort Schweiz, ist das Datenschutzgesetz restriktiver. Der Standort Schweiz bringt aber auch Negatives mit sich. Die Schweiz ist ein eher teurer Standort für solche Dienste und kann daher auch nicht mit den Internationalen Firmen preislich mithalten. Nichts desto trotz geniesst die Swisscom in der Schweiz als Anbieter von IT-Dienstleitungen ein hohes ansehen.
+
+Durch den Einsatz der Cloud Foundry Software, besitzt die Swisscom PaaS-Cloud schon ein grosser Funktionsumfang. Man kann in der Zukunft mit vielen Verbesserungen und Funktionserweiterungen rechnen, da die Cloud Foundry Community bereits sehr gross ist. So profitiert die Swisscom immer auch von anderen Cloud-PaaS Anbietern. Trotzdem fehlen der Swisscom wichtige Features, wie zum Beispiel Auto-Scaling, was viele Kunden benötigen würden. Deshalb eignet sich diese Umgebung nicht für unvorhersehbare Workload, da man die Cloud von Hand anpassen musste, was nicht möglich ist. Für One-Time Usage würde dies aber sicher reichen, da man fast beliebig viele Instanzen starten kann.
+
+Für Startups ist die Swisscom Cloud eine hervorragende Alternative. Das Startup kann seine Umgebung sehr schnell deployen und so das finanzielle Risiko minimieren. Es müssen keine teuren Serverumgebungen gekauft/gemietet werden und man ist sehr flexibel. So lässt man das Produkt auf den günstigen Paas Umgebung der Swisscom laufen und wenn sich das Produkt etabliert, rechnet man wieder von neuem, was sich für das Startup am Besten lohnt.
+
+Für ein Application Maintainer ist es ein wenig schwieriger. Man hat ja bereits in Hardware investiert hat, lohnt es sich selten. Wächst die Umgebung aber schnell, muss die PaaS Cloud in Betrachtung gezogen werden. Durch die schwammigen SLAs muss man aber muss man sich diesen Schritt aber gut überlegen. Die garantierte Verfügbarkeit ist bei der Swisscom noch ''Best Effort'', was viele Firmen sicher nicht gebrauchen können. Auch die vielen Ausfälle in der letzten Zeit, gibt Zweifel auf, ob die Swisscom zum jetzigen Zeitpunkt der richtige Partner wäre, oder ob man lieber zu den grösseren Firmen wie Amazon oder Microsoft gehen soll.
+
 
